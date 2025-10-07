@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title></title>
+
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1, minimum-scale=1,maximum-scale=1"/>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+
+  <meta name="full-screen" content="yes"/>
+  <meta name="x5-fullscreen" content="true"/>
+  <meta name="360-fullscreen" content="true"/>
+
+  
+  <!-- 게임 빌드 css,js head위치에 있는 파일 카피해 온다. -->
+
+
+  <!--  HI5SDK 필수 -->
+  <script src="./HI5SDK.js" charset="utf-8"> </script>
+
+</head>
+<body>
+  <!-- 게임 빌드 index.html body 부분. -->
+
+
+  <!-- 테스트 로고 보기 위해 준비한거 , ait 빌드시 제거 해야 됨. -->
+  <textarea id="retView" style="width: 100%; height: 100vh; margin-top: 50px;  position: fixed; z-index: 999;">
+  </textarea>
+</body>
+
+
+<script type="text/javascript">
+  // 테스트 로그 보는 함수 . ait 빌드시 제거 해야 됨. -->
+  window['addLogView'] = (data) => {
+    const retView = document.getElementById('retView');
+    if(retView){
+      retView.value += JSON.stringify(data);
+      retView.value += "\n";
+    }
+  }
+
+  // [필수] gameId
+  const gameId = "12MatchCat01";
+  // [필수] onload 에서 sdk 초기화 시작
+  // 초기화 끝나면 window.HI5CORE.onLoad를 호출한다.
+  window.onload = async() => {
+    window.HI5TOSS.init(gameId);
+  }
+  // [필수]
+  window.HI5CORE.onLoad = () => {
+    // 게임 빌드 index.html 게임 실행 관련 코드를 가져 와야 한다.
+
+  }
+</script>
+
+
+</html>
