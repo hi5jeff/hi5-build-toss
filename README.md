@@ -1,4 +1,4 @@
-# 1. npm install 통해 연관 node 패키지 설치해준다.
+# 1. npm install 통해 관련 node 패키지 설치해준다.
 ```
 npm install
 ```
