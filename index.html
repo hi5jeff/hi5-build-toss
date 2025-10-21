@@ -30,6 +30,15 @@
   <!-- 테스트 로고 보기 위해 준비한거 , ait 빌드시 제거 해야 됨. -->
   <textarea id="retView" style="width: 100%; height: 100vh; margin-top: 50px;  position: fixed; z-index: 999;">
   </textarea>
+
+  
+  <!-- 토스 로그인 실패시 -->
+  <div id="hi5alertbox" style="position: fixed; width: 100%; height: 100%; left: 0px; top: 0px; background-color: rgba(0, 0, 0, 0.5); align-items: center; justify-content: center; display: none;z-index: 9999;">
+    <div style="width: 80vw; padding: 20px; background-color: rgba(0, 0, 0, 0.75); color: white; border: 2px solid red; border-radius: 15px; ">
+      게임에 참여하려면 토스 로그인에 동의해야 합니다.
+    </div>
+  </div>
+
 </body>
 
 
@@ -48,7 +57,13 @@
   // [필수] onload 에서 sdk 초기화 시작
   // 초기화 끝나면 window.HI5CORE.onLoad를 호출한다.
   window.onload = async() => {
-    window.HI5TOSS.init(gameId);
+    const ret = await window.HI5TOSS.init(gameId);
+    if(ret == false){
+      const hi5alertbox = document.getElementById("hi5alertbox");
+      if(hi5alertbox){
+        hi5alertbox.style.display = "flex";
+      }
+    }
   }
   // [필수]
   window.HI5CORE.onLoad = () => {
