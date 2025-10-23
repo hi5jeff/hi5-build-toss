@@ -43,6 +43,10 @@
 
 
 <script type="text/javascript">
+
+  function closeView(){
+    window.HI5TOSS.close(); // 창 닫기.
+  }
   // 테스트 로그 보는 함수 . ait 빌드시 제거 해야 됨. -->
   window['addLogView'] = (data) => {
     const retView = document.getElementById('retView');
@@ -57,6 +61,9 @@
   // [필수] onload 에서 sdk 초기화 시작
   // 초기화 끝나면 window.HI5CORE.onLoad를 호출한다.
   window.onload = async() => {
+    let ss = window.HI5TOSS.getSafeArea(); // safearea 갸져오기, 
+    addLogView(ss);
+    
     const ret = await window.HI5TOSS.init(gameId);
     if(ret == false){
       const hi5alertbox = document.getElementById("hi5alertbox");
