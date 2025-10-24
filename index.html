@@ -19,7 +19,9 @@
   <!-- 게임 빌드 css,js head위치에 있는 파일 카피해 온다. -->
 
 
-  <!--  HI5SDK 필수 -->
+
+  <!--  HI5SDK -->
+  <link rel="stylesheet" type="text/css" href="./HI5SDK.css"/>
   <script src="./HI5SDK.js" charset="utf-8"> </script>
 
 </head>
@@ -32,10 +34,20 @@
   </textarea>
 
   
-  <!-- 토스 로그인 실패시 -->
-  <div id="hi5alertbox" style="position: fixed; width: 100%; height: 100%; left: 0px; top: 0px; background-color: rgba(0, 0, 0, 0.5); align-items: center; justify-content: center; display: none;z-index: 9999;">
-    <div style="width: 80vw; padding: 20px; background-color: rgba(0, 0, 0, 0.75); color: white; border: 2px solid red; border-radius: 15px; ">
-      게임에 참여하려면 토스 로그인에 동의해야 합니다.
+
+  <!-- Hi5Games 인트로 -->
+  <div id="hi5intro" class="hi5-intro">
+    <div class="hi5logo"></div>
+    <div id="ageall" class="ageall"></div>
+    <div class="loader-box">
+      <div class="loader"></div>
+    </div>
+  </div>
+
+  <div id="hi5alertbox" class="hi5alertbox">
+    <div class="hi5alertbox-msg">
+      <div>게임에 참여하려면 토스 로그인에 동의해야해요.</div>
+      <div class="hi5alertbox-bt"  onclick="closeView()">닫기</div>  
     </div>
   </div>
 
@@ -61,19 +73,30 @@
   // [필수] onload 에서 sdk 초기화 시작
   // 초기화 끝나면 window.HI5CORE.onLoad를 호출한다.
   window.onload = async() => {
-    let ss = window.HI5TOSS.getSafeArea(); // safearea 갸져오기, 
-    addLogView(ss);
-    
+    //
+    // const ageall = document.getElementById("ageall");
+    // if(ageall){
+    //   const ss = window.HI5TOSS.getSafeArea(); // safearea 갸져오기, 
+    //   ageall.style.top = ss.top*1.5 + "px";
+    // }
+
     const ret = await window.HI5TOSS.init(gameId);
     if(ret == false){
+      // window.HI5TOSS.close(); // 창 닫기.
       const hi5alertbox = document.getElementById("hi5alertbox");
       if(hi5alertbox){
         hi5alertbox.style.display = "flex";
       }
     }
+
   }
   // [필수]
   window.HI5CORE.onLoad = () => {
+    // 
+    const retView = document.getElementById('retView');
+    if(retView){
+      retView.style.display = "none";
+    }
     // 게임 빌드 index.html 게임 실행 관련 코드를 가져 와야 한다.
 
   }
