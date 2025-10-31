@@ -29,66 +29,36 @@
   <!-- 게임 빌드 index.html body 부분. -->
 
 
-  <!-- 테스트 로고 보기 위해 준비한거 , ait 빌드시 제거 해야 됨. -->
-  <textarea id="retView" style="width: 100%; height: 100vh; margin-top: 50px;  position: fixed; z-index: 999;">
-  </textarea>
-
-  
-
-  <!-- Hi5Games 인트로 -->
-  <div id="hi5intro" class="hi5-intro">
-    <div class="hi5logo"></div>
-    <div id="ageall" class="ageall"></div>
-    <div class="loader-box">
-      <div class="loader"></div>
-    </div>
+<!-- Hi5Games start -->
+<div id="hi5intro" class="hi5-intro">
+  <div class="hi5logo"></div>
+  <div id="ageall" class="ageall"></div>
+  <div class="loader-box">
+    <div class="loader"></div>
   </div>
+</div>
 
-  <div id="hi5alertbox" class="hi5alertbox">
-    <div class="hi5alertbox-msg">
-      <div>게임에 참여하려면 토스 로그인에 동의해야해요.</div>
-      <div class="hi5alertbox-bt"  onclick="closeView()">닫기</div>  
-    </div>
+<div id="hi5alertbox" class="hi5alertbox">
+  <div class="hi5alertbox-msg">
+    <div id="hi5alertcontent"></div>
+    <div id="hi5alertboxbt" class="hi5alertbox-bt">닫기</div>  
   </div>
+</div>
+
+<!-- <textarea id="retView" style="width: 100%; height: 100vh; margin-top: 50px;  position: fixed; z-index: 999;">
+</textarea> -->
+<!-- Hi5Games end -->
 
 </body>
 
 
 <script type="text/javascript">
-
-  function closeView(){
-    window.HI5TOSS.close(); // 창 닫기.
-  }
-  // 테스트 로그 보는 함수 . ait 빌드시 제거 해야 됨. -->
-  window['addLogView'] = (data) => {
-    const retView = document.getElementById('retView');
-    if(retView){
-      retView.value += JSON.stringify(data);
-      retView.value += "\n";
-    }
-  }
-
   // [필수] gameId
   const gameId = "12MatchCat01";
   // [필수] onload 에서 sdk 초기화 시작
   // 초기화 끝나면 window.HI5CORE.onLoad를 호출한다.
   window.onload = async() => {
-    //
-    // const ageall = document.getElementById("ageall");
-    // if(ageall){
-    //   const ss = window.HI5TOSS.getSafeArea(); // safearea 갸져오기, 
-    //   ageall.style.top = ss.top*1.5 + "px";
-    // }
-
     const ret = await window.HI5TOSS.init(gameId);
-    if(ret == false){
-      // window.HI5TOSS.close(); // 창 닫기.
-      const hi5alertbox = document.getElementById("hi5alertbox");
-      if(hi5alertbox){
-        hi5alertbox.style.display = "flex";
-      }
-    }
-
   }
   // [필수]
   window.HI5CORE.onLoad = () => {
